@@ -1,0 +1,420 @@
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    font-family: 'Inter', sans-serif;
+    color: #fff;
+}
+
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 48px;
+}
+
+/* NAV */
+nav {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    z-index: 10;
+}
+
+.nav-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 18px 48px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+nav .logo img {
+    height: 46px;
+    border: 1px solid rgba(255,255,255,0.5);
+    padding: 4px 10px;
+    background: rgba(255,255,255,0.06);
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 32px;
+    align-items: center;
+}
+
+nav ul li a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+}
+
+nav ul li a:hover { opacity: 0.7; }
+
+.nav-icons {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.nav-icons a {
+    color: #fff;
+    border: 1px solid rgba(255,255,255,0.6);
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.nav-icons a:hover { background: rgba(255,255,255,0.15); }
+
+/* HERO */
+.hero {
+    position: relative;
+    height: 100vh;
+    min-height: 580px;
+    background: url('images/hero-bg.png') center center / cover no-repeat;
+    display: flex;
+    align-items: flex-end;
+}
+
+.hero::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to right, rgba(0,0,0,0.65) 45%, rgba(0,0,0,0.05) 100%);
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+}
+
+.hero-content .container {
+    padding-bottom: 80px;
+}
+
+.hero-content .label {
+    font-size: 11px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+    opacity: 0.75;
+}
+
+.hero-content h1 {
+    font-family: 'Anton', sans-serif;
+    font-size: clamp(36px, 4.2vw, 60px);
+    line-height: 1.08;
+    margin-bottom: 18px;
+    max-width: 560px;
+}
+
+.hero-content .subtext {
+    font-size: 14px;
+    opacity: 0.75;
+}
+
+/* SECTION 2 - DRUGS */
+.section-drugs {
+    background: #1e1e1e;
+    position: relative;
+    width: 100%;
+    height: 982px;
+    overflow: hidden;
+}
+
+.section-drugs .text-side {
+    position: absolute;
+    top: 0; left: 0; bottom: 0;
+    padding: 72px 48px 72px max(48px, calc((100vw - 1100px) / 2 + 48px));
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.section-drugs h2 {
+    font-family: 'Anton', sans-serif;
+    font-size: clamp(24px, 2.6vw, 40px);
+    line-height: 1.12;
+    margin-bottom: 18px;
+    width: 500px;
+    height: 151px;
+    overflow: hidden;
+}
+
+.section-drugs p {
+    font-size: 13px;
+    line-height: 1.75;
+    opacity: 0.7;
+    margin-bottom: 28px;
+    width: 540px;
+    height: 210px;
+    overflow: hidden;
+}
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 220px;
+    height: 50px;
+    background: #3d8fd6;
+    color: #fff;
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    transition: background 0.2s;
+    align-self: flex-start;
+    flex-shrink: 0;
+}
+
+.btn:hover { background: #2d7bc0; }
+
+.section-drugs .image-side {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: calc(max(48px, (100vw - 1100px) / 2 + 48px) + 540px + 80px);
+    width: 610px;
+}
+
+.section-drugs .image-side img {
+    width: 610px;
+    height: 706px;
+    object-fit: cover;
+    display: block;
+}
+
+/* SECTION 3 - THREE COLUMNS */
+.section-columns {
+    background: #6ab4cc;
+    width: 100%;
+    height: 697px;
+    display: flex;
+    align-items: center;
+}
+
+.section-columns .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.section-columns .btn {
+    align-self: center;
+}
+
+.columns-grid {
+    display: grid;
+    grid-template-columns: 320px 320px 320px;
+    justify-content: space-between;
+    margin-bottom: 36px;
+    width: 100%;
+}
+
+.column {
+    width: 320px;
+    height: 218px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    text-align: center;
+    padding: 16px;
+}
+
+.column .num {
+    font-family: 'Inter', sans-serif;
+    font-size: 20px;
+    font-weight: 600;
+    width: 70px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 12px;
+    color: #111;
+    opacity: 0.65;
+}
+
+.column h3 {
+    font-family: 'Inter', sans-serif;
+    font-size: 24px;
+    font-weight: 600;
+    letter-spacing: normal;
+    text-transform: none;
+    margin-bottom: 10px;
+    color: #111;
+}
+
+.column p {
+    font-size: 15px;
+    line-height: 1.6;
+    color: #111;
+    opacity: 0.8;
+}
+
+/* SECTIONS 4+5 - PARTY HOUSE */
+.section-party {
+    position: relative;
+    background: url('images/party-bg.png') center 30% / cover no-repeat;
+    padding: 80px 0;
+}
+
+.section-party::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.6);
+}
+
+.party-layout {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: flex-start;
+    gap: 60px;
+}
+
+.party-left {
+    flex: 1;
+}
+
+.party-headline {
+    font-family: 'Anton', sans-serif;
+    font-size: clamp(32px, 4vw, 60px);
+    line-height: 1.08;
+    text-transform: uppercase;
+    margin-bottom: 48px;
+}
+
+.party-sub {
+    font-family: 'Anton', sans-serif;
+    font-size: clamp(28px, 3.2vw, 50px);
+    text-transform: uppercase;
+    margin-bottom: 18px;
+}
+
+.party-left p {
+    font-size: 13px;
+    line-height: 1.75;
+    opacity: 0.8;
+    margin-bottom: 28px;
+    max-width: 420px;
+}
+
+.party-right {
+    flex: 0 0 320px;
+    padding-top: 20px;
+}
+
+.party-right img {
+    width: 100%;
+    display: block;
+    object-fit: cover;
+}
+
+/* FOOTER */
+footer {
+    background: #181818;
+    padding: 52px 0 28px;
+}
+
+.footer-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 48px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+}
+
+footer .footer-left img {
+    height: 40px;
+    margin-bottom: 18px;
+}
+
+footer .footer-left p {
+    font-size: 13px;
+    line-height: 1.7;
+    opacity: 0.55;
+    max-width: 340px;
+    margin-bottom: 20px;
+}
+
+.footer-social {
+    display: flex;
+    gap: 8px;
+}
+
+.footer-social a {
+    color: #fff;
+    border: 1px solid #444;
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+footer .footer-right {
+    text-align: right;
+}
+
+footer .footer-right ul {
+    list-style: none;
+    display: flex;
+    justify-content: flex-end;
+    gap: 24px;
+}
+
+footer .footer-right ul li a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    opacity: 0.65;
+}
+
+footer .footer-right ul li a:hover { opacity: 1; }
+
+.footer-copyright {
+    grid-column: 1 / -1;
+    text-align: right;
+    font-size: 11px;
+    opacity: 0.35;
+    border-top: 1px solid #2a2a2a;
+    padding-top: 18px;
+    margin-top: 24px;
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+    .container { padding: 0 24px; }
+    .nav-inner { padding: 16px 24px; }
+    nav ul { display: none; }
+    .hero-content .container { padding-bottom: 56px; }
+    .section-drugs { grid-template-columns: 1fr; }
+    .section-drugs .text-side { padding: 52px 24px; }
+    .section-drugs .image-side { height: 260px; }
+    .columns-grid { grid-template-columns: 1fr; }
+    .party-layout { flex-direction: column; }
+    .party-right { flex: none; width: 100%; }
+    .footer-inner { grid-template-columns: 1fr; padding: 0 24px; }
+    footer .footer-right { text-align: left; }
+    footer .footer-right ul { justify-content: flex-start; }
+}

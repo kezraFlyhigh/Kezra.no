@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Kezra — Editor</title>
+    <link rel="stylesheet" href="https://unpkg.com/grapesjs/dist/css/grapes.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { background: #1a1a1a; }
+        #gjs { height: 100vh; }
+
+        .gjs-pn-btn.save-btn {
+            background: #3d8fd6 !important;
+            color: #fff !important;
+            font-weight: 600;
+            padding: 4px 14px;
+            border-radius: 3px;
+        }
+
+        #saving-notice {
+            display: none;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #3d8fd6;
+            color: #fff;
+            padding: 10px 20px;
+            font-family: sans-serif;
+            font-size: 14px;
+            z-index: 99999;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div id="gjs"></div>
+    <div id="saving-notice">Lagrer...</div>
+
+    <script src="https://unpkg.com/grapesjs"></script>
+    <script src="https://unpkg.com/grapesjs-blocks-basic"></script>
+    <script>
+        (async () => {
+            const [htmlRes, cssRes] = await Promise.all([
+                fetch('/index.html'),
+                fetch('/styles.css')
+            ]);
+            const htmlText = await htmlRes.text();
+            const cssText  = await cssRes.text();
+
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(htmlText, 'text/html');
+            const bodyContent = doc.body.innerHTML;
+
+            const editor = grapesjs.init({
+                container: '#gjs',
+                height: '100vh',
+                storageManager: false,
+                components: bodyContent,
+                plugins: ['gjs-blocks-basic'],
+                pluginsOpts: { 'gjs-blocks-basic': {} },
+                canvas: {
+                    styles: [
+                        'https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;600&display=swap',
+                        '/styles.css'
+                    ]
+                },
+                blockManager: { appendTo: '#blocks' },
+                styleManager: {
+                    sectors: [
+                        { name: 'Dimensjoner',  open: false, buildProps: ['width', 'min-height', 'padding', 'margin'] },
+                        { name: 'Typografi',    open: false, buildProps: ['font-size', 'font-weight', 'color', 'text-align', 'line-height'] },
+                        { name: 'Bakgrunn',     open: false, buildProps: ['background-color', 'background'] },
+                        { name: 'Grenser',      open: false, buildProps: ['border', 'border-radius'] },
+                    ]
+                }
+            });
+
+            async function save() {
+                const notice = document.getElementById('saving-notice');
+                notice.style.display = 'block';
+
+                const html = editor.getHtml();
+                const fullHtml = `<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kezra</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+${html}
+</body>
+</html>`;
+
+                await fetch('/save', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ html: fullHtml })
+                });
+
+                notice.textContent = 'Lagret!';
+                setTimeout(() => { notice.style.display = 'none'; }, 2000);
+            }
+
+            editor.Panels.addButton('options', {
+                id: 'save-btn',
+                className: 'save-btn',
+                label: 'Lagre',
+                command: save
+            });
+
+            editor.Keymaps.add('save', 'ctrl+s', save);
+        })();
+    </script>
+</body>
+</html>
